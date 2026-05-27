@@ -17,7 +17,7 @@ app.post('/api/saweria', (req, res) => {
     // Mapping data dari format Saweria ke format script Luau
     const newDonation = {
         nama: data.donator_name || "Anonim",
-        amount: parseInt(data.amount) || 0,
+        amount: parseInt(data.amount_raw) || 0,
         message: data.message || "",
         timestamp: Math.floor(Date.now() / 1000),
         email: data.donator_email || "-",
