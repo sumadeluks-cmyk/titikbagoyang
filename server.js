@@ -11,12 +11,9 @@ let donationQueue = [];
 // ENDPOINT 1: Menerima Webhook dari Saweria
 // ============================================
 app.post('/api/saweria/webhook', (req, res) => {
-    // Saweria mengirim data di dalam req.body
-    // Pastikan webhook di dashboard Saweria diset ke endpoint ini
-    
     const data = req.body;
 
-    // Mapping data dari format Saweria ke format yang dibaca Script Luau-mu
+    // Mapping data dari format Saweria ke format script Luau
     const newDonation = {
         nama: data.donator_name || "Anonim",
         amount: parseInt(data.amount) || 0,
@@ -44,16 +41,14 @@ app.get('/api/saweria/get-donations', (req, res) => {
     // KOSONGKAN antrean agar Roblox tidak membaca donasi yang sama 2x
     donationQueue = [];
 
-    // Format JSON harus persis seperti yang diharapkan script Luau kamu:
-    // { success: true, donations: [...] }
+    // Format JSON persis seperti yang diharapkan script Luau kamu
     res.json({
         success: true,
         donations: donationsToSend
     });
 });
 
-// Jalankan server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Backend Saweria-Roblox berjalan di port ${PORT}`);
-});
+// ============================================
+// EXPORT UNTUK VERCEL (Wajib, jangan dihapus)
+// ============================================
+module.exports = app;
