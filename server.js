@@ -9,8 +9,9 @@ let donationQueue = [];
 
 // ============================================
 // ENDPOINT 1: Menerima Webhook dari Saweria
+// (Path ini sekarang persis dengan map lamamu)
 // ============================================
-app.post('/api/saweria/webhook', (req, res) => {
+app.post('/api/saweria', (req, res) => {
     const data = req.body;
 
     // Mapping data dari format Saweria ke format script Luau
